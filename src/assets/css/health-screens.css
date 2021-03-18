@@ -1,0 +1,67 @@
+.package-grid-block{
+    border-radius: 2px;
+    box-shadow: 0 1px 6px rgba(57,73,76,.35);
+    margin-top: 45px;
+    margin-bottom: 45px;
+    width: 100%;
+    padding: 25px;
+}
+.image-grid{
+    width:20%;
+    position: relative;
+    margin-right: 25px;
+}
+.health-provider-name{
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 25px;
+}
+.check-img{
+    width:100%;
+}
+.content-grid{
+    width: 80%;
+    position: relative;
+}
+.grid-key{
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+.grid-value{
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 25px !important;
+}
+.same-line{
+    display: inline-flex;
+    width: 100%;
+}
+.grand-total{
+    font-weight: 600;
+}
+.paymentbtn{
+    padding: 15px;
+}
+.checkout-heading{
+    font-weight: 600;
+}
+.font600{
+    font-weight: 600;
+}
+.border-radio{
+    border: 1px solid #e7e7e7;
+    padding: 25px 15px 25px 35px;
+}
+.fs15{
+    font-size: 15px;
+}
+.fs18{
+    font-size: 18px;
+}
+.price-key{
+    font-size: 15px;
+}
+.price-value{
+    font-size: 15px;
+    font-weight: 600;
+}

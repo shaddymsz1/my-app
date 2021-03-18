@@ -1,0 +1,147 @@
+@import 'bootstrap.scss';
+@import 'color.scss';
+
+@import 'themify.scss';
+@import 'whether-icon/whether-icon';
+
+
+@import "flag-icon/flag-icon-base";
+@import "flag-icon/flag-icon-more";
+@import "flag-icon/flag-icon-list";
+
+@import 'icoicon/icons';
+@import 'font-awesome.scss';
+
+@import 'chartist/chartist-settings';
+@import 'chartist/chartist';
+
+
+.colored{
+  background: #1890ff;
+  color: #fff !important;
+}
+
+.customBtnLeft{
+  padding: 20px 15px;
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+.hoverRow:hover{
+ cursor: pointer;
+ background-color: #eaeaea;
+}
+.hoverButton{
+  opacity: 0;
+}
+.hoverRow:hover .hoverButton{
+  opacity: 1;
+ }
+.hoverButtons{
+  // background-color: white;
+  padding: 6px;
+  margin-right: 5px;
+}
+.hoverButtons:hover{
+  background-color: #dedddd;
+  box-shadow: -2px 0px 63px -27px rgba(0,0,0,0.75);
+
+}
+#gjs {
+  border: 3px solid #444;
+}
+.template{
+  cursor: pointer;
+
+}
+.your-class-name{
+  text-align: left;
+}
+
+.itemGrid{
+  display: grid;
+    grid-template-columns: auto auto auto;
+    grid-column-gap: 30px;
+}
+.template:hover{
+  box-shadow: 2px 2px 87px -16px rgba(0,0,0,0.75) !important;
+  
+}
+/* Reset some default styling */
+.gjs-cv-canvas {
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+// .page-body{
+//   margin-left: 200px !important;
+// }
+.gjs-block {
+  width: auto;
+  height: auto;
+  min-height: auto;
+}
+.form {
+  border-radius: 3px;
+  padding: 10px 15px;
+  background-color: rgba(0,0,0,0.2) !important;
+}
+
+.icons-flex {
+  background-size: 70% 65% !important;
+  height: 15px;
+  width: 17px;
+  opacity: 0.9;
+}
+
+ [data-tooltip]::after {
+   background: rgba(51, 51, 51, 0.9);
+ }
+
+ .gjs-pn-commands {
+   min-height: 40px;
+ }
+
+ #gjs-sm-float,
+ .gjs-pn-views .fa-cog {
+    display: none;
+ }
+
+ .gjs-am-preview-cont {
+   height: 100px;
+   width: 100%;
+ }
+
+ .gjs-logo-version {
+   background-color: #756467;
+ }
+
+.gjs-pn-panel.gjs-pn-views {
+  padding: 0;
+  border-bottom: none;
+}
+
+.gjs-pn-btn.gjs-pn-active {
+  box-shadow: none;
+}
+
+.gjs-pn-views .gjs-pn-btn {
+    margin: 0;
+    height: 40px;
+    padding: 10px;
+    width: 33.3333%;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+}
+
+.CodeMirror {
+  min-height: 450px;
+  margin-bottom: 8px;
+}
+.grp-handler-close {
+  background-color: transparent;
+  color: #ddd;
+}
+
+.grp-handler-cp-wrap {
+  border-color: transparent;
+}

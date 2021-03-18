@@ -1,0 +1,48 @@
+.package-grid-item {
+    width: 100%;
+    display: inline-flex;
+    padding: 25px;
+    border-radius: 2px;
+    box-shadow: 0 1px 6px rgba(57, 73, 76, .35) !important;
+    cursor: pointer;
+    position: relative;
+    margin-bottom: 25px;
+}
+.travel-heading{
+    text-align: center;
+    font-size:20px ;
+}
+.alert-custom{
+    background: #e7e7e7;
+    padding: 5px 25px;
+    display: block;
+    width: 100%;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+.dottedBorderRadio label:first-child{
+    border: 2px dotted #e7e7e7;
+    padding: 8px 20px;
+}
+.grid-key{
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+.grid-value{
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 25px !important;
+}
+.grand-total{
+    font-weight: 600;
+}
+.paymentbtn{
+    padding: 15px;
+}
+.checkout-heading{
+    font-weight: 600;
+}
+.check-img{
+    width: 60%;
+}

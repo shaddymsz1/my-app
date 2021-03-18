@@ -1,0 +1,126 @@
+.field-with-label {
+    margin-top: 50px;
+    margin-bottom: 25px;
+}
+
+.field-with-label h5 {
+    margin-bottom: 15px;
+    color: #c82333;
+}
+
+.package-grid-item {
+    width: 100%;
+    display: inline-flex;
+    padding: 25px;
+    border-radius: 2px;
+    box-shadow: 0 1px 6px rgba(57, 73, 76, .35) !important;
+    cursor: pointer;
+    position: relative;
+    margin-bottom: 25px;
+}
+
+p.small-text-grid {
+    max-width: 400px;
+    margin-left: 25px;
+    vertical-align: bottom;
+    height: 100%;
+}
+
+.content-box {
+    width: 100%;
+    position: relative;
+    display: inline-flex;
+}
+.other-text{
+    width: 60%;
+}
+.image-box img {
+    width:200px
+}
+
+.price-text {
+    align-items: center;
+    font-size: 18px !important;
+    font-weight: 700;
+    border: 1px solid rgba(107, 122, 254, .7);
+    box-shadow: 0 4px 8px 0 hsla(0, 0%, 81%, .5);
+    border-radius: 2.4px;
+    background-color: #fff;
+    margin: 20px 0 10px;
+    outline: none;
+    padding: 10px 25px;
+    float:right;
+    cursor: pointer;
+}
+
+.price-box {
+    float: right;
+    width: 40%;
+}
+.media-body span{
+    line-height:39px
+}
+.reviewQuotation .media .media-body:before {
+    position: absolute;
+    content: '';
+    width: 0 !important;
+    height: 25px;
+    background-color: #8e24aa;
+    border-radius: 25px;
+    top: 7px;
+    left: 28px;
+}
+.reviewQuotation .media .media-body{
+    text-align: right;
+}
+.with-image img{
+    display: block;
+    padding-right: 25px;
+    padding-left: 25px;
+}
+.with-image .form-check-input{
+    margin-left: 100%;
+}
+.with-image .form-check-inline{
+    margin-top: 15px;
+}
+.check-img-new{
+    width:250px !important;
+}
+.borderCircle .form-check-inline .form-check-inline{
+    border-radius: 5px;
+    border: 1px solid #e7e7e7;
+    padding: 5px 15px;
+}
+.border-dotted {
+    border: 2px dotted #e7e7e7;
+    padding: 15px;
+}
+.alert-p2{
+    padding: 2px;
+    font-size: 15px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+.fs15{
+    font-size: 15px;
+}
+p.terms-text {
+    font-size: 14px;
+    max-width: 510px;
+    text-align: center;
+    margin: auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+.ncbLink{
+    margin-top: 25px;
+    text-decoration: underline;
+}
+#finalForm .col-md-12.mb-3.mt-2.borderCircle label {
+    margin-left: 15px;
+}
+.final-form-heading{
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
