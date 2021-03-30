@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './common/header-component/header';
 import Sidebar from './common/sidebar-component/sidebar';
+import SidebarUser from './common/sidebar-component/sidebarUser';
 import RightSidebar from './common/right-sidebar';
 import Footer from './common/footer';
 import ThemeCustomizer from './common/theme-customizer'
@@ -16,7 +17,8 @@ const AppLayout = ({children}) => {
                 <div className="page-wrapper">
                     <div className="page-body-wrapper">
                         <Header />
-                        <Sidebar />
+                        <SidebarUser/>
+                        {/* <Sidebar /> */}
                         <RightSidebar />
                         <div className="page-body">
                             {children}

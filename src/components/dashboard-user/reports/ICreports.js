@@ -3,11 +3,10 @@ import Breadcrumb from '../../common/breadcrumb'
 import data from "../../../data/dummyTableData"
 import { Line } from 'react-chartjs-2';
 import {buyData , buyOption} from '../../../charts-data/default'
-import TableReporting from './table-reporting';
 import EndorsementTable from '../../dashboard-user/endorsement-table';
 
 
-const  Reporting =(props)=> {
+const  ICReports =(props)=> {
 
 
   const [Q, setQ] = useState("");
@@ -61,7 +60,7 @@ const  Reporting =(props)=> {
                       <div className="col-lg-3">
                         
   
-                    <h3>Earnings </h3>         
+                    <h3>IC Reports </h3>         
                     </div>
                     <div className="col-lg-6">
                       <div className="row pull-right mt-2">
@@ -110,4 +109,4 @@ const  Reporting =(props)=> {
     )
 }
 
-export default Reporting
+export default ICReports

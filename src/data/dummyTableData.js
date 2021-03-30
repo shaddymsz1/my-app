@@ -2,47 +2,21 @@ import React from "react";
 import { Link } from "react-router-dom";
 export const data = [
   {
-    id: "1",
-    name: "xpc1",
-    field1: "dummy value",
-    field2: "dummy value",
-    field3: "dummy value",
-    field4: "dummy value",
-    status: (
-      <div>
-        <i className="fa fa-circle font-success f-12" /> Live
-      </div>
-    ),
-    creat_on: "2018-04-18T00:00:00",
+    cust_name: "shad zaidi",
+    policy_name: "Not available",
+    ins_product: "asssaa0",
+    ic_name: "assaad",
+    start_date: "12/1/1998",
+    end_date: "20/12/2020",
+    commission: "500",
   },
   {
-    id: "2",
-    name: "Car Insurance ",
-    field1: "dummy value",
-    field2: "dummy value",
-    field3: "dummy value",
-    field4: "dummy value",
-    status: (
-      <div>
-        {" "}
-        <i className="fa fa-circle font-warning f-12" /> Draft{" "}
-      </div>
-    ),
-    creat_on: "2018-04-18T00:00:00",
+    cust_name: "shad zaidi",
+    policy_name: "Not available",
   },
   {
-    id: "3",
-    name: "xpc 2",
-    field1: "dummy value",
-    field2: "dummy value",
-    field3: "dummy value",
-    field4: "dummy value",
-    status: (
-      <div>
-        <i className="fa fa-circle font-success f-12" /> Live{" "}
-      </div>
-    ),
-    creat_on: "2018-04-18T00:00:00",
+    cust_name: "shad zaidi",
+    policy_name: "Not available"
   },
   // {
   //     id:"4",

@@ -3,6 +3,7 @@ import ReactTable from "react-table";
 import Profile from "../lead-profile/lead-profile";
 import { useHistory } from "react-router-dom";
 import Checkbox from "react-input-range";
+import handle_change from "knob/handle_change";
 
 const Datatable = ({ data }) => {
   const history = useHistory();
@@ -65,6 +66,16 @@ const Datatable = ({ data }) => {
       Header: "State",
       accessor: "State",
       headerClassName: "your-class-name",
+      Cell: ({value}) => (<span
+        className="hoverButtons"
+        // onClick={() => props.history.push("/dashboard/editor")}
+      >
+        <i
+          style={{ margin: "0 6px", color: "#4466f2" }}
+          className="fa fa-pencil"
+        ></i>{" "}
+        Edit
+      </span> )
     },
   ];
 
@@ -104,13 +115,14 @@ const Datatable = ({ data }) => {
                     ))}
                 </tbody>
             </table> */}
-        <div>
+        <div className="table-responsive">
           <ReactTable
+          className="table table-border-vertical"
             data={data}
             columns={Headers}
             defaultPageSize={pageSize}
             showPagination={pagination}
-            getTrProps={onRowClick}
+            // getTrProps={onRowClick}
           />
         </div>
       </div>

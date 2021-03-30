@@ -189,6 +189,15 @@ import QuizBySubSectionLMS from "./components/LMS/user/QuizBySubSectionLms";
 import videoBySubSectionLms from "./components/LMS/user/videoBySubSectionLms";
 import EmailSettings from "./components/dashboard/Marketing/Email/email-settings";
 import SmsSetting from "./components/dashboard/Marketing/SMS/sms-setting";
+import UserDashboard from './components/dashboard-user/default'
+import RenewManagement from "./components/dashboard-user/renewManagement";
+import SavedPolicies from "./components/dashboard-user/saved-policies";
+import Renewals from "./components/dashboard-user/renewals";
+import Endorsement from "./components/dashboard-user/endorsement";
+import PolicyReminder from "./components/dashboard-user/policy-reminder";
+import Landing from "./components/dashboard/Marketing/Landing/Landing";
+import ProductsReports from "./components/dashboard-user/reports/productReport";
+import ICReports from "./components/dashboard-user/reports/ICreports";
 
 //un-comment this auth by using firebase only
 // import app from './data/base';
@@ -306,6 +315,7 @@ function Root() {
             {/* NOTE :- If u want login with firebase only then uncomment this currentUser condition*/}
             {/* {currentUser !== null ? */}
             <Fragment>
+              
               <App>
                 {/* dashboard menu */}
                 <Route
@@ -320,6 +330,50 @@ function Root() {
                   }}
                 />
                 {/* <Route exact path={`${process.env.PUBLIC_URL}/`} component={Default} /> */}
+
+                {/* User Dashboard starts----------------------- */}
+
+                <Route
+                  path={`${process.env.PUBLIC_URL}/userDashboard/default`}
+                  component={UserDashboard}
+                />
+                <Route
+                  path={`${process.env.PUBLIC_URL}/userDashboard/sold-policies`}
+                  component={RenewManagement}
+                />
+                <Route
+                  path={`${process.env.PUBLIC_URL}/userDashboard/saved-policies`}
+                  component={SavedPolicies}
+                />
+                <Route
+                  path={`${process.env.PUBLIC_URL}/userDashboard/renewals`}
+                  component={Renewals}
+                />
+                <Route
+                  path={`${process.env.PUBLIC_URL}/userDashboard/endorsement`}
+                  component={Endorsement}
+                />
+                <Route
+                  path={`${process.env.PUBLIC_URL}/userDashboard/policy-reminder`}
+                  component={PolicyReminder}
+                />
+                <Route
+                  path={`${process.env.PUBLIC_URL}/userDashboard/CRM`}
+                  component={SmsSetting}
+                />
+                <Route
+                  path={`${process.env.PUBLIC_URL}/userDashboard/earnings`}
+                  component={Reporting}
+                />
+                <Route
+                  path={`${process.env.PUBLIC_URL}/userDashboard/products`}
+                  component={ProductsReports}
+                />
+                <Route
+                  path={`${process.env.PUBLIC_URL}/userDashboard/ICreports`}
+                  component={ICReports}
+                />
+                {/* Super admin dashboard starts---------------------------- */}
                 <Route
                   path={`${process.env.PUBLIC_URL}/dashboard/default`}
                   component={Default}
