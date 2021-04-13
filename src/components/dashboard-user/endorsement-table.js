@@ -4,85 +4,107 @@ import ReactTable from "react-table";
 
 function EndorsementTable({data}) {
     
-const pageSize=10;
-const Headers = [
-    {
-      Header: () => (
-        <div style={{ textAlign: "center" }}>Policy Number</div>
-      ),
-        accessor: "cust_name",
-        Cell: row => (
-          <div style={{ textAlign: "center" }}>{row.value}</div>
-        )
-    },
-    {
-        Header: "IC Name",
-        accessor: "policy_name",
-        Cell: row => (
-          <div style={{ textAlign: "center" }}>{row.value}</div>
-        )
-    },
-    {
-        Header: "End Date",
-        accessor: "ins_product",
-        Cell: row => (
-          <div style={{ textAlign: "center" }}>{row.value}</div>
-        )
-    },
-    {
-        Header: "Customer Name",
-        accessor: "ic_name",
-        Cell: row => (
-          <div style={{ textAlign: "center" }}>{row.value}</div>
-        )
-
-    },
-    {
-        Header: "Mobile Number",
-        accessor: "start_date",
-        Cell: row => (
-          <div style={{ textAlign: "center" }}>{row.value}</div>
-        )
-    },
-    {
-        Header: "Premium Amount",
-        accessor: "end_date",
-        Cell: row => (
-          <div style={{ textAlign: "center" }}>{row.value}</div>
-        )
-    },
-    {
-        Header: "Actions",
-        accessor: "action",
-        headerClassName: "",
-        width: 200,
-        Cell: ({value}) => (
-            <div className="">
-                <span
-                        className="hoverButtons"
-                        // onClick={() => props.history.push("/dashboard/editor")}
-                      >
-                        <i
-                          style={{ margin: "0 6px", color: "#4466f2" }}
-                          className="fa fa-link"
-                        ></i>{" "}
-                        Go Endorsement
-                      </span>
-                      
-                      
-            </div>
-         )
-    }
-]
     return (
         <Fragment>
             <div className="card">
                 <div className="table-responsive">
-                    <ReactTable
+                {/* <ReactTable
                     data={data}
+                    filterable
+          defaultFilterMethod={(filter, row) =>
+            String(row[filter.id]) === filter.value}
                     columns={Headers}            
                     defaultPageSize={pageSize}
-                    showPagination={true}/>
+                    showPagination={true}
+                    className="-striped -highlight"/> */}
+
+<ReactTable
+          data={data}
+          filterable
+          defaultFilterMethod={(filter, row) =>
+            String(row[filter.id]) === filter.value}
+          columns={[
+                              {
+
+                    Header: () => (
+                      <div style={{ textAlign: "center"}}>Customer Name</div>
+                    ),
+                      accessor: "cust_name",
+                      Cell: row => (
+                        <div style={{ textAlign: "center" }}>{row.value}</div>
+                      ),
+                  },
+                  {
+                      Header: "Policy Name",
+                      accessor: "policy_name",
+                      Cell: row => (
+                        <div style={{ textAlign: "center" }}>{row.value}</div>
+                      )
+                  },
+                  {
+                      Header: "INS Product",
+                      accessor: "ins_product",
+                      Cell: row => (
+                        <div style={{ textAlign: "center" }}>{row.value}</div>
+                      )
+                  },
+                  {
+                      Header: "IC Name",
+                      accessor: "ic_name",
+                      Cell: row => (
+                        <div style={{ textAlign: "center" }}>{row.value}</div>
+                      )
+
+                  },
+                  {
+                      Header: "Start Date",
+                      accessor: "start_date",
+                      Cell: row => (
+                        <div style={{ textAlign: "center" }}>{row.value}</div>
+                      )
+                  },
+                  {
+                      Header: "End Date",
+                      accessor: "end_date",
+                      Cell: row => (
+                        <div style={{ textAlign: "center" }}>{row.value}</div>
+                      )
+                  },
+                  {
+                    Header: "Commision",
+                    accessor: "commision",
+                    Cell: row => (
+                      <div style={{ textAlign: "center" }}>{row.value}</div>
+                    )
+                  },
+                  {
+                      Header: "Actions",
+                      accessor: "action",
+                      headerClassName: "",
+                      width: 200,
+                      Cell: () => (
+        <div className="">
+            <span
+                    className="hoverButtons"
+                    // onClick={() => props.history.push("/dashboard/editor")}
+                  >
+                    <i
+                      style={{ margin: "0 6px", color: "#4466f2" }}
+                      className="fa fa-link"
+                    ></i>{" "}
+                    Go Endorsement
+                  </span>
+                  
+                  
+        </div>
+     )
+}
+         
+        ]}
+          defaultPageSize={10}
+          className="-striped -highlight"
+        />
+                    
                 </div>
             </div>
         </Fragment>
@@ -90,3 +112,4 @@ const Headers = [
 }
 
 export default EndorsementTable
+

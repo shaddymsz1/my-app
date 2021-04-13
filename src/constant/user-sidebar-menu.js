@@ -53,7 +53,7 @@ import {
         title: "CRM",
         icon: Info,
         type: "link",
-        path: "/userDashboard/CRM",
+        path: "dashboard/emailSetting",
         active: false,
       },
       {

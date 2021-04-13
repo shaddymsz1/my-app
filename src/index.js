@@ -189,7 +189,7 @@ import QuizBySubSectionLMS from "./components/LMS/user/QuizBySubSectionLms";
 import videoBySubSectionLms from "./components/LMS/user/videoBySubSectionLms";
 import EmailSettings from "./components/dashboard/Marketing/Email/email-settings";
 import SmsSetting from "./components/dashboard/Marketing/SMS/sms-setting";
-import UserDashboard from './components/dashboard-user/default'
+import UserDashboard from "./components/dashboard-user/default";
 import RenewManagement from "./components/dashboard-user/renewManagement";
 import SavedPolicies from "./components/dashboard-user/saved-policies";
 import Renewals from "./components/dashboard-user/renewals";
@@ -198,6 +198,12 @@ import PolicyReminder from "./components/dashboard-user/policy-reminder";
 import Landing from "./components/dashboard/Marketing/Landing/Landing";
 import ProductsReports from "./components/dashboard-user/reports/productReport";
 import ICReports from "./components/dashboard-user/reports/ICreports";
+import AddUser from "./components/dashboard/addUser/addUser";
+import Permissions from "./components/dashboard/addUser/permission";
+import AddUserProfile from "./components/dashboard-user/userProfile/userProfile";
+import AddDepartment from "./components/dashboard/addUser/addDepartment";
+import AddBranch from "./components/dashboard/addUser/addBranch";
+import AddIC from "./components/dashboard/addUser/addIC";
 
 //un-comment this auth by using firebase only
 // import app from './data/base';
@@ -248,7 +254,7 @@ function Root() {
               component={LoginWithVideo}
             />
             <Route
-              path={`${process.env.PUBLIC_URL}/pages/signup`}
+              path={`${process.env.PUBLIC_URL}/signup`}
               component={Signup}
             />
             <Route
@@ -315,7 +321,6 @@ function Root() {
             {/* NOTE :- If u want login with firebase only then uncomment this currentUser condition*/}
             {/* {currentUser !== null ? */}
             <Fragment>
-              
               <App>
                 {/* dashboard menu */}
                 <Route
@@ -372,6 +377,10 @@ function Root() {
                 <Route
                   path={`${process.env.PUBLIC_URL}/userDashboard/ICreports`}
                   component={ICReports}
+                />
+                <Route
+                  path={`${process.env.PUBLIC_URL}/userDashboard/addUserProfile`}
+                  component={AddUserProfile}
                 />
                 {/* Super admin dashboard starts---------------------------- */}
                 <Route
@@ -497,6 +506,29 @@ function Root() {
                 <Route
                   path={`${process.env.PUBLIC_URL}/dashboard/lead-profile`}
                   component={Profile}
+                />
+
+                {/* Add user and permissions */}
+
+                <Route
+                  path={`${process.env.PUBLIC_URL}/dashboard/addUser`}
+                  component={AddUser}
+                />
+                <Route
+                  path={`${process.env.PUBLIC_URL}/dashboard/addDepartment`}
+                  component={AddDepartment}
+                />
+                <Route
+                  path={`${process.env.PUBLIC_URL}/dashboard/addBranch`}
+                  component={AddBranch}
+                />
+                <Route
+                  path={`${process.env.PUBLIC_URL}/dashboard/addIC`}
+                  component={AddIC}
+                />
+                <Route
+                  path={`${process.env.PUBLIC_URL}/dashboard/permissions`}
+                  component={Permissions}
                 />
 
                 <Route

@@ -14,7 +14,7 @@ const UserMenu = ({ history }) => {
 
   const logOut = () => {
     console.log("clicked");
-    // localStorage.removeItem("profileURL");
+    localStorage.removeItem("token");
     // app.auth().signOut();
     history.push(`${process.env.PUBLIC_URL}/login`);
   };

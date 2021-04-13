@@ -13,20 +13,52 @@ import app, {
 } from "../data/base";
 
 const Signin = ({ history }) => {
-  const [email, setEmail] = useState("test@gmail.com");
-  const [password, setPassword] = useState("test123");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loggedIN, setLoggedIN] = useState(false);
 
   const [value, setValue] = useState(localStorage.getItem("profileURL" || man));
 
-  useEffect(() => {
-    if (value !== null) localStorage.setItem("profileURL", value);
-    else localStorage.setItem("profileURL", man);
-  }, [value]);
+  // useEffect(() => {
+  //   if (value !== null) localStorage.setItem("profileURL", value);
+  //   else localStorage.setItem("profileURL", man);
+  // }, [value]);
 
   const loginAuth = async () => {
-    history.push(`${process.env.PUBLIC_URL}/dashboard/default`);
+    // history.push(`${process.env.PUBLIC_URL}/dashboard/default`);
+    try {
+      let result = await fetch(
+        "https://fathomless-plateau-00864.herokuapp.com/auth/useradmin/signin",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
+      result = await result.json();
+      localStorage.setItem("token", result.token);
+      // history.push(`${process.env.PUBLIC_URL}/dashboard/default`);
+      if (result.token == null) {
+        setTimeout(() => {
+          toast.error("Oppss.. The password or username is invalid.");
+        }, 200);
+      } else {
+        setLoggedIN(true);
+        history.push(`${process.env.PUBLIC_URL}/dashboard/default`);
+        window.location.reload();
+      }
+      console.log(result);
+    } catch (error) {
+      setTimeout(() => {
+        toast.error("Oppss.. The server is down.");
+      }, 200);
+    }
 
     // try {
+
     //     if (app.options.apiKey !== "REACT_APP_FIREBASE_KEY") {
     //         await app
     //             .auth()

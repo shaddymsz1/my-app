@@ -61,12 +61,16 @@ export const MainSideBarMenu = [
     active: false,
     children: [
       {
-        path: "/dashboard/reporting", title: "report1", type: "link"
+        path: "/dashboard/reporting",
+        title: "report1",
+        type: "link",
       },
       {
-        path: "/dashboard/reporting2", title: "report2", type: "link"
+        path: "/dashboard/reporting2",
+        title: "report2",
+        type: "link",
       },
-    ]
+    ],
   },
   {
     title: "LMS",
@@ -125,6 +129,40 @@ export const MainSideBarMenu = [
       {
         path: "/admin/tools/dms",
         title: "DMS",
+        type: "link",
+      },
+    ],
+  },
+  {
+    title: "Manage Users",
+    icon: UserCheck,
+    type: "sub",
+    path: "",
+    active: false,
+    children: [
+      {
+        path: "/dashboard/addUser",
+        title: "Add User",
+        type: "link",
+      },
+      {
+        path: "/dashboard/addDepartment",
+        title: "Add Department",
+        type: "link",
+      },
+      {
+        path: "/dashboard/addBranch",
+        title: "Add Branch",
+        type: "link",
+      },
+      {
+        path: "/dashboard/addIC",
+        title: "Add IC",
+        type: "link",
+      },
+      {
+        path: "/dashboard/permissions",
+        title: "Permissions",
         type: "link",
       },
     ],

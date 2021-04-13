@@ -8,17 +8,23 @@ import ThemeCustomizer from './common/theme-customizer'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from './common/loader';
+import Signin from '../auth/signin';
 
 
 const AppLayout = ({children}) => {
+    const token = localStorage.getItem("token")
         return (
+            
             <div>
+                 
                 <Loader />
+                { token !== null ?
                 <div className="page-wrapper">
                     <div className="page-body-wrapper">
+                        
                         <Header />
-                        <SidebarUser/>
-                        {/* <Sidebar /> */}
+                        {/* <SidebarUser/> */}
+                        <Sidebar />
                         <RightSidebar />
                         <div className="page-body">
                             {children}
@@ -27,7 +33,10 @@ const AppLayout = ({children}) => {
                         {/*<ThemeCustomizer />*/}
                     </div>
                 </div>
+                : <Signin />
+                }
                 <ToastContainer />
+            
             </div>
         );
 }
