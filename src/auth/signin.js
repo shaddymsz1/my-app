@@ -25,7 +25,6 @@ const Signin = ({ history }) => {
   // }, [value]);
 
   const loginAuth = async () => {
-    // history.push(`${process.env.PUBLIC_URL}/dashboard/default`);
     try {
       let result = await fetch(
         "https://fathomless-plateau-00864.herokuapp.com/auth/useradmin/signin",
@@ -39,18 +38,17 @@ const Signin = ({ history }) => {
         }
       );
       result = await result.json();
-      localStorage.setItem("token", result.token);
-      // history.push(`${process.env.PUBLIC_URL}/dashboard/default`);
       if (result.token == null) {
+        
         setTimeout(() => {
           toast.error("Oppss.. The password or username is invalid.");
         }, 200);
       } else {
-        setLoggedIN(true);
+        console.log(result)
+        localStorage.setItem("token", result.token);
         history.push(`${process.env.PUBLIC_URL}/dashboard/default`);
-        window.location.reload();
       }
-      console.log(result);
+      
     } catch (error) {
       setTimeout(() => {
         toast.error("Oppss.. The server is down.");

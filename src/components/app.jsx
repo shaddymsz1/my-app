@@ -11,17 +11,19 @@ import Loader from './common/loader';
 import Signin from '../auth/signin';
 
 
-const AppLayout = ({children}) => {
+const AppLayout = ({ children }) => {
+
     const token = localStorage.getItem("token")
-        return (
-            
-            <div>
-                 
-                <Loader />
-                { token !== null ?
+
+    return (
+
+        <div>
+
+            <Loader />
+            { token == null ? <Signin /> :
                 <div className="page-wrapper">
                     <div className="page-body-wrapper">
-                        
+
                         <Header />
                         {/* <SidebarUser/> */}
                         <Sidebar />
@@ -33,12 +35,12 @@ const AppLayout = ({children}) => {
                         {/*<ThemeCustomizer />*/}
                     </div>
                 </div>
-                : <Signin />
-                }
-                <ToastContainer />
-            
-            </div>
-        );
+
+            }
+            <ToastContainer />
+
+        </div>
+    );
 }
 
 export default AppLayout;
