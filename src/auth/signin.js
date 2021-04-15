@@ -39,16 +39,15 @@ const Signin = ({ history }) => {
       );
       result = await result.json();
       if (result.token == null) {
-        
         setTimeout(() => {
           toast.error("Oppss.. The password or username is invalid.");
         }, 200);
       } else {
-        console.log(result)
+        console.log(result);
         localStorage.setItem("token", result.token);
         history.push(`${process.env.PUBLIC_URL}/dashboard/default`);
+        window.location.reload();
       }
-      
     } catch (error) {
       setTimeout(() => {
         toast.error("Oppss.. The server is down.");

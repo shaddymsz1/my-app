@@ -15,9 +15,9 @@ const UserMenu = ({ history }) => {
   const logOut = () => {
     console.log("clicked");
     localStorage.removeItem("token");
+    window.location.reload();
     // app.auth().signOut();
     history.push(`${process.env.PUBLIC_URL}/login`);
-    window.location.reload()
   };
 
   return (

@@ -1,5 +1,5 @@
 import React from "react";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useRef } from "react";
 import Breadcrumb from "../../common/breadcrumb";
 import { Typeahead } from "react-bootstrap-typeahead";
 import { Field, Form, Formik } from "formik";
@@ -13,10 +13,17 @@ import ManagePermission from "./managePermission";
 function Permissions() {
   const [value, setValue] = useState({ create_lead: false, edit_lead: false });
   const [multiSelections, setMultiSelections] = useState([]);
+  const email = [];
 
-  function changeValue(e) {
-    // setValue({ [e.target.name]: e.target.value });
-    console.log(e.target.name);
+  const scrollToDiv = (ref) => window.scrollTo(0, ref.current.offsetTop);
+  const el1 = useRef();
+
+  function handleSubmit(e) {
+    for (var i = 0; i < multiSelections.length; i++) {
+      email.push(multiSelections[i].name);
+    }
+    scrollToDiv(el1);
+    console.log(multiSelections);
   }
 
   return (
@@ -38,6 +45,7 @@ function Permissions() {
                     id="basic-typeahead-multiple"
                     labelKey="name"
                     multiple
+                    allowNew
                     onChange={setMultiSelections}
                     options={options}
                     placeholder="Choose several states..."
@@ -76,8 +84,19 @@ function Permissions() {
             </Form>
           </Formik>
         </div>
+        <div className="card-footer">
+          <button
+            className="btn-primary btn pull-right"
+            onClick={handleSubmit}
+            type="submit"
+          >
+            Change Permissions
+          </button>
+        </div>
       </div>
-      <ManagePermission />
+      <div ref={el1}>
+        <ManagePermission mail={multiSelections} />
+      </div>
     </Fragment>
   );
 }
