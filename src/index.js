@@ -204,6 +204,8 @@ import AddUserProfile from "./components/dashboard-user/userProfile/userProfile"
 import AddDepartment from "./components/dashboard/addUser/addDepartment";
 import AddBranch from "./components/dashboard/addUser/addBranch";
 import AddIC from "./components/dashboard/addUser/addIC";
+import EarningReports from "./components/dashboard-user/reports/earning";
+import AddIP from "./components/dashboard/addUser/addIP";
 
 //un-comment this auth by using firebase only
 // import app from './data/base';
@@ -368,7 +370,7 @@ function Root() {
                 />
                 <Route
                   path={`${process.env.PUBLIC_URL}/userDashboard/earnings`}
-                  component={Reporting}
+                  component={EarningReports}
                 />
                 <Route
                   path={`${process.env.PUBLIC_URL}/userDashboard/products`}
@@ -525,6 +527,10 @@ function Root() {
                 <Route
                   path={`${process.env.PUBLIC_URL}/dashboard/addIC`}
                   component={AddIC}
+                />
+                <Route
+                  path={`${process.env.PUBLIC_URL}/dashboard/addIP`}
+                  component={AddIP}
                 />
                 <Route
                   path={`${process.env.PUBLIC_URL}/dashboard/permissions`}

@@ -5,23 +5,13 @@ import { Typeahead } from "react-bootstrap-typeahead";
 import { Field, Form, Formik } from "formik";
 import CSVReader from "react-csv-reader";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function AddBranch() {
   const [row, setRow] = useState([]);
   const handleForce = (data, fileInfo) => {
     setRow(data);
-
-    axios
-      .post(
-        "https://fathomless-plateau-00864.herokuapp.com/bankManagement/addBranch",
-        data
-      )
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    console.log("file uploaded");
   };
 
   const papaparseOptions = {
@@ -31,8 +21,22 @@ function AddBranch() {
     transformHeader: (header) => header.toLowerCase().replace(/\W/g, "_"),
   };
 
-  const submitHandler = (e) => {
-    console.log(row);
+  const submitHandler = () => {
+    axios
+      .post(
+        "https://fathomless-plateau-00864.herokuapp.com/bankManagement/addBranch",
+        row
+      )
+      .then((response) => {
+        setTimeout(() => {
+          toast.success("File Successfully Uploaded !");
+        }, 200);
+      })
+      .catch((error) => {
+        setTimeout(() => {
+          toast.error("Something Went Wrong :(");
+        }, 200);
+      });
   };
 
   return (
@@ -86,7 +90,7 @@ function AddBranch() {
             <button
               type="button"
               className="btn pull-right btn-block btn-primary text-center"
-              onSubmit={submitHandler}
+              onClick={submitHandler}
             >
               Save
             </button>

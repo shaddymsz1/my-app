@@ -16,26 +16,26 @@ export const data = [
   },
   {
     cust_name: "shad zaidi",
-    policy_name: "Not available"
+    policy_name: "Not available",
   },
   // {
-  //     id:"4",
-  //     name: "Sales  Menu",
-  //     status: <i className="fa fa-circle font-danger f-12" />,
-  //     creat_on:"2018-04-18T00:00:00"
+  //   id: "4",
+  //   name: "Sales  Menu",
+  //   status: <i className="fa fa-circle font-danger f-12" />,
+  //   creat_on: "2018-04-18T00:00:00",
   // },
   // {
-  //     id:"5",
-  //     name: "Vendor Menu",
-  //     status: <i className="fa fa-circle font-success f-12" />,
-  //     creat_on:"2018-04-18T00:00:00"
+  //   id: "5",
+  //   name: "Vendor Menu",
+  //   status: <i className="fa fa-circle font-success f-12" />,
+  //   creat_on: "2018-04-18T00:00:00",
   // },
   // {
-  //     id:"6",
-  //     name: "Category Menu",
-  //     status: <i className="fa fa-circle font-warning f-12" />,
-  //     creat_on:"2018-04-18T00:00:00"
-  // }
+  //   id: "6",
+  //   name: "Category Menu",
+  //   status: <i className="fa fa-circle font-warning f-12" />,
+  //   creat_on: "2018-04-18T00:00:00",
+  // },
 ];
 
 export default data;

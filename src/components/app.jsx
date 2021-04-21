@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect,useState } from 'react';
 import Header from './common/header-component/header';
 import Sidebar from './common/sidebar-component/sidebar';
 import SidebarUser from './common/sidebar-component/sidebarUser';
@@ -9,11 +9,14 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from './common/loader';
 import Signin from '../auth/signin';
+import signup from '../pages/signup';
+import axios from 'axios'
 
 
 const AppLayout = ({ children }) => {
 
     const token = localStorage.getItem("token")
+
 
     return (
 
@@ -34,7 +37,9 @@ const AppLayout = ({ children }) => {
                         <Footer />
                         {/*<ThemeCustomizer />*/}
                     </div>
+                    
                 </div>
+                
 
             }
             <ToastContainer />

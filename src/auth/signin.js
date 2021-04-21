@@ -43,8 +43,8 @@ const Signin = ({ history }) => {
           toast.error("Oppss.. The password or username is invalid.");
         }, 200);
       } else {
-        console.log(result);
         localStorage.setItem("token", result.token);
+        localStorage.setItem("email", result.user.email);
         history.push(`${process.env.PUBLIC_URL}/dashboard/default`);
         window.location.reload();
       }

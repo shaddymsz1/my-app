@@ -3,19 +3,21 @@ import Breadcrumb from "../../common/breadcrumb";
 import FilterTable from "./datatable/lead-filter";
 import { useHistory } from "react-router-dom";
 import AccordionTwo from "../../base/accordionComponent/accordianTwo";
+import axios from "axios";
+import { object } from "yup";
+import Loader from "../../common/loader";
 const Leads = () => {
   const [data, setData] = useState([]); // will fetch data from api and
   const history = useHistory();
-  const handleOnClick = useCallback(
-    () => history.push("/dashboard/create-lead"),
-    [history]
-  );
+  function handleOnClick() {
+    history.push(`${process.env.PUBLIC_URL}/dashboard/create-lead`);
+  }
 
-  // useEffect(() => {
-  //   fetch("https://devmentor.live/api/examples/contacts?api_key=b7c58b") // input url
-  //     .then((response) => response.json())
-  //     .then((json) => setData(json));
-  // }, []);
+  const email = localStorage.getItem("email");
+
+  const [permission, setPermission] = useState({});
+  const url = `https://fathomless-plateau-00864.herokuapp.com/permission/getPermission/${email}`;
+
   var leadsData = {
     leads: [
       {
@@ -315,29 +317,41 @@ const Leads = () => {
 
   useEffect(() => {
     setData(leadsData.leads);
+    const fetchData = async () => {
+      const result = await axios.get(url);
+
+      const [permissionsFetched] = result.data.permissions;
+
+      setPermission(permissionsFetched);
+    };
+
+    fetchData();
   }, []);
-  // useEffect(() => {
-  //   fetch("http://localhost:8080/leads").then((res) =>
-  //     res.json().then((data) => setData(data.leads))
-  //   );
-  // }, []);
+
+  if (permission && Object.keys(permission).length === 0) {
+    return <Loader />;
+  }
   return (
     <Fragment>
       <div
         style={{ display: "flex", paddingBottom: "40px", alignItems: "center" }}
       >
         <Breadcrumb parent="Dashboard" title="Leads" />
-        <div>
-          <button
-            style={{ width: "181px", marginRight: "16px" }}
-            className="btn btn-block btn-secondary btn-outline-secondary  "
-            class="btn pull-right btn-block btn-primary text-center"
-            type="button"
-            onClick={handleOnClick}
-          >
-            Create Lead
-          </button>
-        </div>
+        {permission.create_lead == true ? (
+          <div>
+            <button
+              style={{ width: "181px", marginRight: "16px" }}
+              className="btn btn-block btn-secondary btn-outline-secondary  "
+              class="btn pull-right btn-block btn-primary text-center"
+              type="button"
+              onClick={handleOnClick}
+            >
+              Create Lead
+            </button>
+          </div>
+        ) : (
+          <p></p>
+        )}
       </div>
 
       <div className="container-fluid  ">

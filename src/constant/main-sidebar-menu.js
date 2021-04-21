@@ -157,7 +157,12 @@ export const MainSideBarMenu = [
       },
       {
         path: "/dashboard/addIC",
-        title: "Add IC",
+        title: "Add Company",
+        type: "link",
+      },
+      {
+        path: "/dashboard/addIP",
+        title: "Add Product",
         type: "link",
       },
       {
