@@ -1,7 +1,8 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
+import axios from "axios";
 import Breadcrumb from "../../common/breadcrumb";
-import data from "../../../data/dummyTableData";
+// import data from "../../../data/dummyTableData";
 import { Typeahead } from "react-bootstrap-typeahead";
 import EndorsementTable from "../endorsement-table";
 import { buyData, buyOption } from "../../../../src/charts-data/default";
@@ -10,16 +11,16 @@ import {
   SingleDatePicker,
 } from "react-google-flight-datepicker";
 import "react-google-flight-datepicker/dist/main.css";
+import Loader from "../../common/loader";
 
 function EarningReports() {
   const [Q, setQ] = useState("");
-  const [searchColumns, setSearchColumns] = useState([
-    "cust_name",
-    "policy_name",
-  ]);
-  console.log(data, "this is data");
-  const columns = ["Customer Name", "Policy Name"];
-  const channelColumns = ["LinkedIn", "Facebook"];
+  const [searchColumns, setSearchColumns] = useState(["user", "policy_name"]);
+  //   console.log(data, "this is data");
+  const columns = ["User", "Policy Name"];
+  const [data, setData] = useState([]);
+  const url =
+    "https://fathomless-plateau-00864.herokuapp.com/reports/earningsReports";
 
   const search = (rows) => {
     return rows.filter((row) =>
@@ -30,6 +31,17 @@ function EarningReports() {
     );
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios.get(url);
+      console.log(result.data);
+      setData(result.data);
+    };
+    fetchData();
+  }, []);
+  if (data && data.length === 0) {
+    return <Loader />;
+  }
   return (
     <Fragment>
       <div className="row">

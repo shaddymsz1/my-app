@@ -151,5 +151,7 @@
     "moment-timezone": "^0.5.26",
     "react": "^16.10.2",
     "react-dom": "^16.10.2"
-  }
+  },
+  
+  "proxy": "http://fathomless-plateau-00864.herokuapp.com"
 }

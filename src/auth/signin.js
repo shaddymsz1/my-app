@@ -26,17 +26,14 @@ const Signin = ({ history }) => {
 
   const loginAuth = async () => {
     try {
-      let result = await fetch(
-        "https://fathomless-plateau-00864.herokuapp.com/auth/useradmin/signin",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        }
-      );
+      let result = await fetch("/auth/useradmin/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
       result = await result.json();
       if (result.token == null) {
         setTimeout(() => {

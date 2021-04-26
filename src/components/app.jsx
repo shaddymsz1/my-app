@@ -17,7 +17,6 @@ const AppLayout = ({ children }) => {
 
     const token = localStorage.getItem("token")
 
-
     return (
 
         <div>
@@ -33,6 +32,7 @@ const AppLayout = ({ children }) => {
                         <RightSidebar />
                         <div className="page-body">
                             {children}
+                            
                         </div>
                         <Footer />
                         {/*<ThemeCustomizer />*/}

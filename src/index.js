@@ -255,10 +255,10 @@ function Root() {
               path={`${process.env.PUBLIC_URL}/pages/loginWithVideo`}
               component={LoginWithVideo}
             />
-            <Route
+            {/* <Route
               path={`${process.env.PUBLIC_URL}/signup`}
               component={Signup}
-            />
+            /> */}
             <Route
               path={`${process.env.PUBLIC_URL}/pages/signupWithImg`}
               component={SignupWithImg}
