@@ -6,11 +6,11 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 // import options from "../../../data/typeaheadData";
 
-function AddDepartment({ history }) {
+function AddUserLevel({ history }) {
   const [options, setOptions] = useState([]);
-  const [data, setData] = useState({ name: "" });
+  const [data, setData] = useState({ level_name: "" });
   const url =
-    "https://fathomless-plateau-00864.herokuapp.com/bankManagement/departments";
+    "https://fathomless-plateau-00864.herokuapp.com/bankManagement/getUserLevel";
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get(url);
@@ -25,14 +25,14 @@ function AddDepartment({ history }) {
   const submitHandler = () => {
     axios
       .post(
-        "https://fathomless-plateau-00864.herokuapp.com/bankManagement/department/605c77b5b00ebd51dc2ae1ee",
+        "https://fathomless-plateau-00864.herokuapp.com/bankManagement/createUserLevel",
         data
       )
       .then((response) => {
         setTimeout(() => {
-          toast.success("Department Successfully Uploaded !");
+          toast.success("User Level Successfully Uploaded !");
         }, 100);
-        history.push(`${process.env.PUBLIC_URL}/dashboard/addUserLevel`);
+        history.push(`${process.env.PUBLIC_URL}/dashboard/addBranch`);
       })
       .catch((error) => {
         setTimeout(() => {
@@ -43,22 +43,22 @@ function AddDepartment({ history }) {
 
   return (
     <Fragment>
-      <Breadcrumb parent="Department" title="Add Department" />
+      <Breadcrumb parent="User Level" title="Add User Level" />
       <div className="card col-sm-6 mx-auto">
         <div className="card-header">
-          <h3>Add Department</h3>
+          <h3>Add User Level</h3>
         </div>
         <div className="card-body">
           <div class="form-group row">
             <label for="staticEmail" class="col-sm-4 col-form-label">
-              Select Departments
+              Select User Level
             </label>
             <div class="col-sm-8">
               <Typeahead
                 id="multiple-typeahead"
                 clearButton
                 defaultSelected={options.slice(0, 4)}
-                labelKey="name"
+                labelKey="level_name"
                 multiple
                 options={options}
                 placeholder="Choose a state..."
@@ -67,11 +67,11 @@ function AddDepartment({ history }) {
           </div>
           <div class="form-group row">
             <label for="inputPassword" class="col-sm-4 col-form-label">
-              Add Custom Department
+              Add Custom User Level
             </label>
             <div class="col-sm-8">
               <input
-                name="name"
+                name="level_name"
                 onChange={changeHandler}
                 className="form-control"
               />
@@ -94,4 +94,4 @@ function AddDepartment({ history }) {
   );
 }
 
-export default AddDepartment;
+export default AddUserLevel;

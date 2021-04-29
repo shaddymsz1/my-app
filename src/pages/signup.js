@@ -1,58 +1,91 @@
 import React, { Fragment, useState } from "react";
 import { useHistory, withRouter } from "react-router";
 import logo from "../assets/images/endless-logo.png";
-
+import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 
 const Signup = () => {
   const history = useHistory();
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [phone, setPhone] = useState("");
-  const [designation, setDesignation] = useState("");
-  const [location, setLocation] = useState("");
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    phone: "",
+    designation: "",
+    location: "",
+  });
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [phone, setPhone] = useState("");
+  // const [designation, setDesignation] = useState("");
+  // const [location, setLocation] = useState("");
 
-  const signupAuth = async () => {
-    // history.push(`${process.env.PUBLIC_URL}/dashboard/default`);
-    try {
-      let result = await fetch(
+  const submitHandler = (e) => {
+    e.preventDefault();
+    axios
+      .post(
         "https://fathomless-plateau-00864.herokuapp.com/auth/useradmin",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify({
-            name,
-            email,
-            password,
-            phone,
-            designation,
-            location,
-          }),
-        }
-      );
-      result = await result.json();
-      console.log(result);
-      //   localStorage.setItem("token", result);
-      // history.push(`${process.env.PUBLIC_URL}/dashboard/default`);
-      if (result == null) {
+        data
+      )
+      .then((response) => {
         setTimeout(() => {
-          toast.error("Oppss.. Choose different password.");
+          toast.success("Product Successfully Uploaded !");
+          history.push(`${process.env.PUBLIC_URL}/login`);
+        }, 100);
+      })
+      .catch((error) => {
+        setTimeout(() => {
+          toast.error("Something Went Wrong :(");
         }, 200);
-      } else {
-        history.push(`${process.env.PUBLIC_URL}/dashboard/default`);
-      }
-      console.log(result);
-    } catch (error) {
-      setTimeout(() => {
-        toast.error("Oppss.. The server is down.");
-      }, 200);
-    }
-    console.log(email, password);
+      });
+  };
+  // history.push(`${process.env.PUBLIC_URL}/dashboard/default`);
+  // try {
+  //   let result = await fetch(
+  //     "https://fathomless-plateau-00864.herokuapp.com/auth/useradmin",
+  //     {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Accept: "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         name,
+  //         email,
+  //         password,
+  //         phone,
+  //         designation,
+  //         location,
+  //       }),
+  //     }
+  //   );
+  //   result = await result.json();
+  //   console.log(result);
+  //   //   localStorage.setItem("token", result);
+  //   // history.push(`${process.env.PUBLIC_URL}/dashboard/default`);
+  //   if (result == null) {
+  //     setTimeout(() => {
+  //       toast.error("Oppss.. Choose different password.");
+  //     }, 200);
+  //   } else {
+  //     setTimeout(() => {
+  //       toast.success("Please Login.");
+  //     }, 200);
+  //     history.push(`${process.env.PUBLIC_URL}/login`);
+
+  //   }
+  //   console.log(result);
+  // } catch (error) {
+  //   setTimeout(() => {
+  //     toast.error("Oppss.. The server is down.");
+  //   }, 200);
+  // }
+  //   console.log(data);
+  // };
+
+  const changeHandler = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
   };
 
   return (
@@ -81,10 +114,11 @@ const Signup = () => {
                                 Enter Full Name
                               </label>
                               <input
+                                name="name"
                                 className="form-control"
                                 type="text"
                                 placeholder="John"
-                                onChange={(e) => setName(e.target.value)}
+                                onChange={changeHandler}
                               />
                             </div>
                           </div>
@@ -95,7 +129,7 @@ const Signup = () => {
                             className="form-control"
                             type="text"
                             placeholder="abc@xyz.com"
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={changeHandler}
                           />
                         </div>
                         <div className="form-group">
@@ -104,7 +138,7 @@ const Signup = () => {
                             className="form-control"
                             type="password"
                             placeholder="**********"
-                            onChange={(e) => setPassword(e.target.value)}
+                            onChange={changeHandler}
                           />
                         </div>
                         <div className="form-row">
@@ -117,7 +151,7 @@ const Signup = () => {
                                 className="form-control"
                                 type="text"
                                 placeholder=""
-                                onChange={(e) => setPhone(e.target.value)}
+                                onChange={changeHandler}
                               />
                             </div>
                           </div>
@@ -130,7 +164,7 @@ const Signup = () => {
                                 className="form-control"
                                 type="text"
                                 placeholder=""
-                                onChange={(e) => setDesignation(e.target.value)}
+                                onChange={changeHandler}
                               />
                             </div>
                           </div>
@@ -141,14 +175,14 @@ const Signup = () => {
                             className="form-control"
                             type="text"
                             placeholder=""
-                            onChange={(e) => setLocation(e.target.value)}
+                            onChange={changeHandler}
                           />
                         </div>
                         <div className="form-row">
                           <div className="col-sm-4">
                             <button
                               className="btn btn-primary"
-                              onClick={() => signupAuth()}
+                              onClick={submitHandler}
                               type="submit"
                             >
                               Sign Up

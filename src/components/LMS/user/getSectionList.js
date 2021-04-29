@@ -39,7 +39,7 @@ const GetAllSectionList = () => {
                       className="card progress-media"
                       onClick={() => {
                         history.push({
-                          pathname: `${process.env.PUBLIC_URL}/student/lms/${item.id}`,
+                          pathname: `${process.env.PUBLIC_URL}/videos/lms/:sectionId`,
                           state: { id: item.id },
                         });
                       }}

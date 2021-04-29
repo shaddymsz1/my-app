@@ -206,6 +206,7 @@ import AddBranch from "./components/dashboard/addUser/addBranch";
 import AddIC from "./components/dashboard/addUser/addIC";
 import EarningReports from "./components/dashboard-user/reports/earning";
 import AddIP from "./components/dashboard/addUser/addIP";
+import AddUserLevel from "./components/dashboard/addUser/addUserLevel";
 
 //un-comment this auth by using firebase only
 // import app from './data/base';
@@ -467,7 +468,7 @@ function Root() {
                   component={GetAllSectionList}
                 />
                 <Route
-                  path={`${process.env.PUBLIC_URL}/student/lms/:sectionId`}
+                  path={`${process.env.PUBLIC_URL}/videos/lms/:sectionId`}
                   exact={true}
                   component={GetLMSSubSectionList}
                 />
@@ -520,6 +521,10 @@ function Root() {
                 <Route
                   path={`${process.env.PUBLIC_URL}/dashboard/addDepartment`}
                   component={AddDepartment}
+                />
+                <Route
+                  path={`${process.env.PUBLIC_URL}/dashboard/addUserLevel`}
+                  component={AddUserLevel}
                 />
                 <Route
                   path={`${process.env.PUBLIC_URL}/dashboard/addBranch`}

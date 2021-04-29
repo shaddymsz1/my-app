@@ -42,7 +42,12 @@ const Signin = ({ history }) => {
       } else {
         localStorage.setItem("token", result.token);
         localStorage.setItem("email", result.user.email);
-        history.push(`${process.env.PUBLIC_URL}/dashboard/default`);
+        localStorage.setItem("designation", result.user.designation);
+        if (localStorage.getItem("designation" === "user")) {
+          history.push(`${process.env.PUBLIC_URL}/dashboard/default`);
+        } else {
+          history.push(`${process.env.PUBLIC_URL}/dashboard/addDepartment`);
+        }
         window.location.reload();
       }
     } catch (error) {
@@ -152,7 +157,7 @@ const Signin = ({ history }) => {
         .then(function (result) {
           setValue(result.user.photoURL);
           setTimeout(() => {
-            history.push(`${process.env.PUBLIC_URL}/dashboard/default`);
+            history.push(`${process.env.PUBLIC_URL}/dashboard/addDepartment`);
           }, 200);
         });
     } catch (error) {

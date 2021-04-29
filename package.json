@@ -92,6 +92,7 @@
     "react-toastify": "^5.4.0",
     "react-vertical-timeline-component": "^2.5.0",
     "reactjs-file-uploader": "^1.0.8",
+    "reactjs-media": "^1.5.1",
     "reactour": "^1.15.3",
     "reactstrap": "^8.0.1",
     "redux-logger": "^3.0.6",

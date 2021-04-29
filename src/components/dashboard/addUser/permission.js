@@ -1,18 +1,16 @@
 import React from "react";
-import { Fragment, useState, useRef } from "react";
+import { Fragment, useState, useRef, useEffect } from "react";
+import axios from "axios";
 import Breadcrumb from "../../common/breadcrumb";
 import { Typeahead } from "react-bootstrap-typeahead";
 import { Field, Form, Formik } from "formik";
 import options from "../../../data/typeaheadData";
-import OwnershipTransfer from "../../forms/wizard/OwnershipTransfer";
-import { Accordion, AccordionItem } from "react-light-accordion";
 import "react-light-accordion/demo/css/index.css";
-import Switch from "../../../custom-components/switch/switch";
 import ManagePermission from "./managePermission";
 
 function Permissions() {
-  const [value, setValue] = useState({ create_lead: false, edit_lead: false });
   const [multiSelections, setMultiSelections] = useState([]);
+  const [mailOptions, setMailOptions] = useState([]);
   const email = [];
 
   const scrollToDiv = (ref) => window.scrollTo(0, ref.current.offsetTop);
@@ -25,6 +23,14 @@ function Permissions() {
     scrollToDiv(el1);
     console.log(multiSelections);
   }
+  const url = "https://fathomless-plateau-00864.herokuapp.com/auth/getusers";
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios.get(url);
+      setMailOptions(result.data.users);
+    };
+    fetchData();
+  }, []);
 
   return (
     <Fragment>
@@ -43,12 +49,12 @@ function Permissions() {
                 <div class="col-sm-4">
                   <Typeahead
                     id="basic-typeahead-multiple"
-                    labelKey="name"
+                    labelKey="email"
                     multiple
                     allowNew
                     onChange={setMultiSelections}
-                    options={options}
-                    placeholder="Choose several states..."
+                    options={mailOptions}
+                    placeholder="Choose several Emails..."
                     selected={multiSelections}
                   />
                 </div>
