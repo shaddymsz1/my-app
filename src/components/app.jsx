@@ -27,8 +27,8 @@ const AppLayout = ({ children }) => {
                     <div className="page-body-wrapper">
 
                         <Header />
-                        {/* <SidebarUser/> */}
-                        <Sidebar />
+                        <SidebarUser/>
+                        {/* <Sidebar /> */}
                         <RightSidebar />
                         <div className="page-body">
                             {children}

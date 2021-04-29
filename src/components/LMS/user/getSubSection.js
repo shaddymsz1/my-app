@@ -1,27 +1,30 @@
 import React, { Fragment, useState, useEffect } from "react";
 import Breadcrumb from "../../common/breadcrumb";
-import { useLocation } from "react-router";
+import { useLocation, withRouter } from "react-router";
 import axios from "axios";
 import Loader from "../../common/loader";
 
-const GetLMSSubSectionList = () => {
+const GetLMSSubSectionLists = () => {
   const location = useLocation();
-  const moduleID = location.state;
+
   const [value, setValue] = useState([]);
 
-  const url =
-    "https://fathomless-plateau-00864.herokuapp.com/training/getVideos";
-
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios.get(url, { moduleID });
+    if (location.state !== null) {
+      const moduleID = location.state;
+      console.log(moduleID);
 
-      const data = result.data;
+      const url = `https://fathomless-plateau-00864.herokuapp.com/training/getVideos/${moduleID}`;
+      const fetchData = async () => {
+        const result = await axios.get(url);
 
-      console.log(data);
-    };
-    console.log(moduleID);
-    fetchData();
+        const data = result.data;
+
+        console.log(data);
+      };
+      console.log(moduleID);
+      fetchData();
+    }
   }, []);
   // console.log(moduleID);
   return (
@@ -60,4 +63,4 @@ const GetLMSSubSectionList = () => {
   );
 };
 
-export default GetLMSSubSectionList;
+export default withRouter(GetLMSSubSectionLists);

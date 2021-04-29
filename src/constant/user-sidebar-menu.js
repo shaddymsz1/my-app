@@ -67,6 +67,13 @@ export const MainSideBarMenu = [
     active: false,
   },
   {
+    title: "Training",
+    icon: Info,
+    type: "link",
+    path: "/student/lms/section-list",
+    active: false,
+  },
+  {
     title: "Reports",
     icon: PenTool,
     type: "sub",

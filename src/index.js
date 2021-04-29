@@ -463,6 +463,7 @@ function Root() {
                 />
                 <Route
                   path={`${process.env.PUBLIC_URL}/student/lms/section-list`}
+                  exact={true}
                   component={GetAllSectionList}
                 />
                 <Route
