@@ -15,7 +15,7 @@ const CreateLMSVideoForm = () => {
     imagefile: "",
     videofile: "",
   });
-  const url = "https://fathomless-plateau-00864.herokuapp.com/v1/getmodules";
+  const url = "/v1/getmodules";
 
   const changeHandler = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });

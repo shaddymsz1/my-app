@@ -89,34 +89,15 @@ const Datatable = ({ data }) => {
       onClick: (e) => {
         history.push({
           pathname: "/dashboard/lead-profile",
-          search: "?the=search",
-          state: { info: rowInfo },
+          state: { dataSent: data[rowInfo.index] },
         });
-        console.log("It was in this row:", state);
       },
     };
   };
 
-  // const columns = data[0] && Object.keys(data[0]);
   return (
     <Fragment>
       <div className="container-fluid mt-4 responsive-table">
-        {/* <table class="table  table-hover mt-5">
-                <thead>
-                    <tr>{data[0] && columns.map((heading)=> <th>{heading}</th>)} </tr>
-                </thead>
-                <tbody>
-                    {data.map((row) =>(
-                        <tr>
-                            {columns.map((column)=>(
-                                <td onClick={handleClick}>
-                                    {row[column]}
-                                </td>
-                            ))}
-                        </tr>
-                    ))}
-                </tbody>
-            </table> */}
         <div className="table-responsive">
           <ReactTable
             className="table table-border-vertical"

@@ -1,20 +1,17 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Collapse } from "reactstrap";
-import { Search } from "react-feather";
+
 import Datatable from "./Datatable";
+import { Typeahead } from "react-bootstrap-typeahead";
 
-const FilterTable = ({ data, channel }) => {
-  const [isFilter, setIsFilter] = useState(true);
+const FilterTable = ({ data }) => {
   const [Q, setQ] = useState("");
-  const [searchColumns, setSearchColumns] = useState(["_id", "Account_Rating"]);
-  console.log(data, "this is data");
-  useEffect(() => {
-    console.log(data, "this is data");
-  }, [data]);
-
-  // const columns = data[0] && Object.keys(data[0]).filter((a) => a === "City");
-  const columns = ["City", "Gender"];
-  const channelColumns = ["LinkedIn", "Facebook"];
+  const columns = ["First Name", "Gender", "Last Name", "City"];
+  const [searchColumns, setSearchColumns] = useState([
+    "First_Name",
+    "Last_Name",
+    "Gender",
+    "City",
+  ]);
 
   const search = (rows) => {
     return rows.filter((row) =>
@@ -27,67 +24,36 @@ const FilterTable = ({ data, channel }) => {
 
   return (
     <Fragment>
-      <div className="row">
-        <div className="col-xl-2" style={{padding : "0px"}}>
-          <div className="col-xl-12">
-            <div className="card">
-              <Collapse isOpen={isFilter}>
-                <div
-                  className="collapse show"
-                  id="collapseicon"
-                  aria-labelledby="collapseicon"
-                  data-parent="#accordion"
-                >
-                  <div
-                    style={{ padding: "11px" }}
-                    className="card-body filter-cards-view animate-chk"
-                  >
-                    <div className="job-filter">
-                      <div className="faq-form">
-                        <input
-                          className="form-control"
-                          type="text"
-                          placeholder="Search.."
-                          type="text"
-                          value={Q}
-                          onChange={(e) => setQ(e.target.value)}
-                        />
-                      </div>
-                    </div>
-                    <div className="checkbox-animated">
-                      {columns &&
-                        columns
-                          .filter((c) => c !== "id")
-                          .map((column) => (
-                            <label className="d-block">
-                              <input
-                                className="checkbox_animated"
-                                type="checkbox"
-                                checked={searchColumns.includes(column)}
-                                onChange={(e) => {
-                                  const checked = searchColumns.includes(
-                                    column
-                                  );
-                                  setSearchColumns((prev) =>
-                                    checked
-                                      ? prev.filter((sc) => sc !== column)
-                                      : [...prev, column]
-                                  );
-                                }}
-                              />
-                              {column}
-                            </label>
-                          ))}
-                    </div>
-                  </div>
+      <div className="card col-lg-12">
+        <div className="card-body">
+          <div className="row">
+            <div className="col-sm-12 ">
+              <form className="form-inline pull-right">
+                <div className="form-group mb-3">
+                  <Typeahead
+                    id="multiple-typeahead"
+                    clearButton
+                    // defaultSelected={}
+                    labelKey="name"
+                    multiple
+                    options={columns}
+                    placeholder="Select Columns..."
+                  />
+                  <input
+                    className="form-control"
+                    placeholder="Search"
+                    type="text"
+                    value={Q}
+                    onChange={(e) => setQ(e.target.value)}
+                  />
                 </div>
-              </Collapse>
+              </form>
             </div>
           </div>
-        </div>
-        <div className="col-xl-10" style={{padding : "0px"}}>
-          <div className="card ">
-            <Datatable data={search(data)} />
+          <div className="row">
+            <div className="col-lg-12">
+              <Datatable data={search(data)} />
+            </div>
           </div>
         </div>
       </div>
