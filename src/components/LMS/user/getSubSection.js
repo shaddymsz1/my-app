@@ -3,60 +3,98 @@ import Breadcrumb from "../../common/breadcrumb";
 import { useLocation, withRouter } from "react-router";
 import axios from "axios";
 import Loader from "../../common/loader";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { ReactVideo } from "reactjs-media";
 
 const GetLMSSubSectionLists = () => {
   const location = useLocation();
+  const [modal, setModal] = useState(false);
+  const [videoUrl, setVideourl] = useState("");
+  const [imageUrl, setImageurl] = useState("");
+  const [VideoName, setVideoName] = useState("");
 
-  const [value, setValue] = useState([]);
+  const moduleID = location.state.id;
+  const [videos, setVideos] = useState([]);
+  const [title, setTitle] = useState(location.state.title);
+  console.log(moduleID);
+  const url = `https://fathomless-plateau-00864.herokuapp.com/training/getVideos/${moduleID}`;
 
   useEffect(() => {
-    if (location.state !== null) {
-      const moduleID = location.state;
-      console.log(moduleID);
+    const fetchData = async () => {
+      const result = await axios.get(url);
 
-      const url = `https://fathomless-plateau-00864.herokuapp.com/training/getVideos/${moduleID}`;
-      const fetchData = async () => {
-        const result = await axios.get(url);
-
-        const data = result.data;
-
-        console.log(data);
-      };
-      console.log(moduleID);
-      fetchData();
-    }
+      const data = result.data;
+      setVideos(data.videos);
+      console.log(data.videos);
+    };
+    console.log(moduleID);
+    fetchData();
   }, []);
+
+  const toggle = (url, imageUrl, name) => {
+    setVideourl(url);
+    setImageurl(imageUrl);
+    setVideoName(name);
+    setModal(!modal);
+  };
   // console.log(moduleID);
   return (
     <Fragment>
-      <Breadcrumb parent="section1" title="Section 1 All Videos and Quiz" />
+      <Breadcrumb parent="section1" title={title} />
       {/* {value.map((item) => (
         <li>{item.id}</li>
       ))} */}
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-6 col-xl-3 set-col-6">
-            <div className="card">
-              <div className="blog-box blog-grid text-center product-hover">
-                <img
-                  className="img-fluid top-radius-blog"
-                  src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
-                  alt=""
-                />
-                <div className="blog-details-main">
-                  <ul className="blog-social">
-                    <li className="digits">Video - 1</li>
-                    <li className="digits">Quizz - 2</li>
-                    <li className="digits">Watch Time - 15 Minutes</li>
-                  </ul>
-                  <hr />
-                  <h6 className="blog-bottom-details">
-                    Section 1 - first Video
-                  </h6>
-                </div>
-              </div>
-            </div>
+            {videos.length
+              ? videos.map((video) => {
+                  return (
+                    <div
+                      onClick={() =>
+                        toggle(video.videoURL, video.imageURL, video.videoName)
+                      }
+                      className="card"
+                    >
+                      <div className="blog-box blog-grid text-center product-hover">
+                        <img
+                          style={{ width: "250px", height: "182px" }}
+                          className="img-fluid top-radius-blog"
+                          src={video.imageURL}
+                          alt=""
+                        />
+                        <div className="blog-details-main">
+                          <ul className="blog-social">
+                            <li className="digits">Video - 1</li>
+                            <li className="digits">Quizz - 2</li>
+                            <li className="digits">Watch Time - 15 Minutes</li>
+                          </ul>
+                          <hr />
+                          <h6 className="blog-bottom-details">
+                            {video.videoName}
+                          </h6>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })
+              : "loading"}
           </div>
+          <Modal
+            contentClassName="custom-modal-style"
+            isOpen={modal}
+            toggle={toggle}
+          >
+            <ModalHeader toggle={toggle}>{VideoName}</ModalHeader>
+            <ReactVideo src={videoUrl} poster={imageUrl} />
+            {/* <ModalBody>.....</ModalBody>
+            <ModalFooter>
+              <Button color="primary">Save Changes</Button>
+              <Button color="secondary" onClick={toggle}>
+                Cancel
+              </Button>
+            </ModalFooter> */}
+          </Modal>
         </div>
       </div>
     </Fragment>

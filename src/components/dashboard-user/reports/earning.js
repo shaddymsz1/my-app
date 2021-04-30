@@ -20,7 +20,7 @@ function EarningReports() {
   const columns = ["User", "Policy Name"];
   const [data, setData] = useState([]);
   const url =
-    "https://fathomless-plateau-00864.herokuapp.com/reports/companyReports";
+    "https://fathomless-plateau-00864.herokuapp.com/reports/earningsReports";
 
   const search = (rows) => {
     return rows.filter((row) =>

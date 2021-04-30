@@ -61,7 +61,7 @@ function AddDepartment({ history }) {
                 labelKey="name"
                 multiple
                 options={options}
-                placeholder="Choose a state..."
+                placeholder="Choose Departments"
               />
             </div>
           </div>
