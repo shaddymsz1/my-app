@@ -19,18 +19,13 @@ const AppLayout = ({ children }) => {
     
     const token = localStorage.getItem("token")
     const designation = localStorage.getItem("designation")
-    console.log(designation)
+    console.log(token)
 
     return (
 
         <div>
-            <Route
-              path={`${process.env.PUBLIC_URL}/pages/signup`}
-              component={signup}
-            />
-
             <Loader />
-            { token == null ? <Signin /> :
+            
                 <div className="page-wrapper">
                     <div className="page-body-wrapper">
                         {designation == "user" ? <SidebarUser/>: <Sidebar />}
@@ -47,8 +42,6 @@ const AppLayout = ({ children }) => {
                     
                 </div>
                 
-
-            }
             <ToastContainer />
 
         </div>

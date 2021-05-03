@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import "./index.scss";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
@@ -207,6 +207,7 @@ import AddIC from "./components/dashboard/addUser/addIC";
 import EarningReports from "./components/dashboard-user/reports/earning";
 import AddIP from "./components/dashboard/addUser/addIP";
 import AddUserLevel from "./components/dashboard/addUser/addUserLevel";
+import ProtectedRoute from "./ProtectedRoutes";
 
 //un-comment this auth by using firebase only
 // import app from './data/base';
@@ -234,6 +235,18 @@ function Root() {
   //     abortController.abort();
   //   };
   // }, [abortController]);
+
+  const token = localStorage.getItem("token");
+  const userType = localStorage.getItem("designation");
+  const [isAuth, setIsAuth] = useState(false);
+
+  // useEffect(() => {
+  //   if (token === null) {
+  //     setIsAuth(false);
+  //   } else {
+  //     setIsAuth(true);
+  //   }
+  // }, []);
 
   return (
     <div className="App">
@@ -324,768 +337,773 @@ function Root() {
             {/* NOTE :- If u want login with firebase only then uncomment this currentUser condition*/}
             {/* {currentUser !== null ? */}
             <Fragment>
-              <App>
-                {/* dashboard menu */}
-                <Route
-                  exact
-                  path={`${process.env.PUBLIC_URL}/`}
-                  render={() => {
-                    return (
-                      <Redirect
-                        to={`${process.env.PUBLIC_URL}/dashboard/default`}
-                      />
-                    );
-                  }}
-                />
-                {/* <Route exact path={`${process.env.PUBLIC_URL}/`} component={Default} /> */}
+              {token !== null ? (
+                <App>
+                  {/* dashboard menu */}
+                  <Route
+                    exact
+                    path={`${process.env.PUBLIC_URL}/`}
+                    render={() => {
+                      return (
+                        <Redirect
+                          to={`${process.env.PUBLIC_URL}/dashboard/default`}
+                        />
+                      );
+                    }}
+                  />
+                  {/* <Route exact path={`${process.env.PUBLIC_URL}/`} component={Default} /> */}
 
-                {/* User Dashboard starts----------------------- */}
+                  {/* User Dashboard starts----------------------- */}
 
-                <Route
-                  path={`${process.env.PUBLIC_URL}/userDashboard/default`}
-                  component={UserDashboard}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/userDashboard/sold-policies`}
-                  component={RenewManagement}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/userDashboard/saved-policies`}
-                  component={SavedPolicies}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/userDashboard/renewals`}
-                  component={Renewals}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/userDashboard/endorsement`}
-                  component={Endorsement}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/userDashboard/policy-reminder`}
-                  component={PolicyReminder}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/userDashboard/CRM`}
-                  component={SmsSetting}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/userDashboard/earnings`}
-                  component={EarningReports}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/userDashboard/products`}
-                  component={ProductsReports}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/userDashboard/ICreports`}
-                  component={ICReports}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/userDashboard/addUserProfile`}
-                  component={AddUserProfile}
-                />
-                {/* Super admin dashboard starts---------------------------- */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/dashboard/default`}
-                  component={Default}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/dashboard/ecommerce`}
-                  component={Ecommerce}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/dashboard/university`}
-                  component={University}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/dashboard/crypto`}
-                  component={Crypto}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/dashboard/server`}
-                  component={ServerComponent}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/dashboard/project`}
-                  component={Project}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/dashboard/emailSetting`}
-                  component={EmailSettings}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/dashboard/smsSetting`}
-                  component={SmsSetting}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/review-quote/share`}
-                  component={ReviewQuotationShareURL}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/personal-information`}
-                  component={PersonalInformation}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/health-insurance`}
-                  component={HealthInsurance}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/life-insurance`}
-                  component={LifeInsurance}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/travel-insurance`}
-                  component={TravelInsurance}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/dashboard/leads`}
-                  component={Leads}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/dashboard/create-lead`}
-                  component={CreateLead}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/admin/lms/create-section`}
-                  component={CreateLMSSection}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/admin/lms/create-video`}
-                  component={CreateLMSVideoForm}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/admin/lms/section-list`}
-                  component={SectionList}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/admin/lms/edit-video`}
-                  component={EditLMSVideoForm}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/student/lms/section-list`}
-                  exact={true}
-                  component={GetAllSectionList}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/videos/lms/:sectionId`}
-                  exact={true}
-                  component={GetLMSSubSectionList}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/student/lms/:sectionId/:quizVideo`}
-                  exact={true}
-                  component={videoBySubSectionLms}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/student/lms/:sectionId/videoCompleted/:quizId`}
-                  exact={true}
-                  component={QuizBySubSectionLMS}
-                />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/userDashboard/default`}
+                    component={UserDashboard}
+                    // isAuth={isAuth}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/userDashboard/sold-policies`}
+                    component={RenewManagement}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/userDashboard/saved-policies`}
+                    component={SavedPolicies}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/userDashboard/renewals`}
+                    component={Renewals}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/userDashboard/endorsement`}
+                    component={Endorsement}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/userDashboard/policy-reminder`}
+                    component={PolicyReminder}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/userDashboard/CRM`}
+                    component={SmsSetting}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/userDashboard/earnings`}
+                    component={EarningReports}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/userDashboard/products`}
+                    component={ProductsReports}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/userDashboard/ICreports`}
+                    component={ICReports}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/userDashboard/addUserProfile`}
+                    component={AddUserProfile}
+                  />
+                  {/* Super admin dashboard starts---------------------------- */}
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/dashboard/default`}
+                    component={Default}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/dashboard/ecommerce`}
+                    component={Ecommerce}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/dashboard/university`}
+                    component={University}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/dashboard/crypto`}
+                    component={Crypto}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/dashboard/server`}
+                    component={ServerComponent}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/dashboard/project`}
+                    component={Project}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/dashboard/emailSetting`}
+                    component={EmailSettings}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/dashboard/smsSetting`}
+                    component={SmsSetting}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/review-quote/share`}
+                    component={ReviewQuotationShareURL}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/personal-information`}
+                    component={PersonalInformation}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/health-insurance`}
+                    component={HealthInsurance}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/life-insurance`}
+                    component={LifeInsurance}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/travel-insurance`}
+                    component={TravelInsurance}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/dashboard/leads`}
+                    component={Leads}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/dashboard/create-lead`}
+                    component={CreateLead}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/admin/lms/create-section`}
+                    component={CreateLMSSection}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/admin/lms/create-video`}
+                    component={CreateLMSVideoForm}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/admin/lms/section-list`}
+                    component={SectionList}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/admin/lms/edit-video`}
+                    component={EditLMSVideoForm}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/student/lms/section-list`}
+                    exact={true}
+                    component={GetAllSectionList}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/videos/lms/:sectionId`}
+                    exact={true}
+                    component={GetLMSSubSectionList}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/student/lms/:sectionId/:quizVideo`}
+                    exact={true}
+                    component={videoBySubSectionLms}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/student/lms/:sectionId/videoCompleted/:quizId`}
+                    exact={true}
+                    component={QuizBySubSectionLMS}
+                  />
 
-                {/* <Route
+                  {/* <Route
                     path={`${process.env.PUBLIC_URL}/dashboard/leads-channel`}
                     component={LeadsChannel}
                   /> */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/dashboard/marketing`}
-                  component={Marketing}
-                />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/dashboard/marketing`}
+                    component={Marketing}
+                  />
 
-                <Route
-                  exact
-                  path={`${process.env.PUBLIC_URL}/dashboard/all-templates`}
-                  component={AllTemplates}
-                />
-                <Route
-                  exact
-                  path={`${process.env.PUBLIC_URL}/dashboard/page-details`}
-                  component={PageDetails}
-                />
-                <Route
-                  exact
-                  path={`${process.env.PUBLIC_URL}/dashboard/editor`}
-                  component={EditorComponent}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/dashboard/lead-profile`}
-                  component={Profile}
-                />
+                  <Route
+                    exact
+                    path={`${process.env.PUBLIC_URL}/dashboard/all-templates`}
+                    component={AllTemplates}
+                  />
+                  <Route
+                    exact
+                    path={`${process.env.PUBLIC_URL}/dashboard/page-details`}
+                    component={PageDetails}
+                  />
+                  <Route
+                    exact
+                    path={`${process.env.PUBLIC_URL}/dashboard/editor`}
+                    component={EditorComponent}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/dashboard/lead-profile`}
+                    component={Profile}
+                  />
 
-                {/* Add user and permissions */}
+                  {/* Add user and permissions */}
 
-                <Route
-                  path={`${process.env.PUBLIC_URL}/dashboard/addUser`}
-                  component={AddUser}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/dashboard/addDepartment`}
-                  component={AddDepartment}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/dashboard/addUserLevel`}
-                  component={AddUserLevel}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/dashboard/addBranch`}
-                  component={AddBranch}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/dashboard/addIC`}
-                  component={AddIC}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/dashboard/addIP`}
-                  component={AddIP}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/dashboard/permissions`}
-                  component={Permissions}
-                />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/dashboard/addUser`}
+                    component={AddUser}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/dashboard/addDepartment`}
+                    component={AddDepartment}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/dashboard/addUserLevel`}
+                    component={AddUserLevel}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/dashboard/addBranch`}
+                    component={AddBranch}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/dashboard/addIC`}
+                    component={AddIC}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/dashboard/addIP`}
+                    component={AddIP}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/dashboard/permissions`}
+                    component={Permissions}
+                  />
 
-                <Route
-                  path={`${process.env.PUBLIC_URL}/life-terms`}
-                  component={LifeTerms}
-                />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/life-terms`}
+                    component={LifeTerms}
+                  />
 
-                {/* Widgets Menu */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/widgets/general`}
-                  component={General}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/widgets/chart`}
-                  component={Chart}
-                />
+                  {/* Widgets Menu */}
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/widgets/general`}
+                    component={General}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/widgets/chart`}
+                    component={Chart}
+                  />
 
-                {/* ui-elements */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/ui-element/avatar`}
-                  component={Avatar}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/ui-element/uibreadcrumb`}
-                  component={UIBreadCrumb}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/ui-element/grid`}
-                  component={Grid}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/ui-element/helperclass`}
-                  component={HelperClass}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/ui-element/list`}
-                  component={List}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/ui-element/ribbon`}
-                  component={Ribbon}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/ui-element/shadow`}
-                  component={Shadow}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/ui-element/spinner`}
-                  component={Spinner}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/ui-element/statecolor`}
-                  component={Statecolor}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/ui-element/steps`}
-                  component={Steps}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/ui-element/tagsandpills`}
-                  component={TagsandPills}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/ui-element/typography`}
-                  component={Typography}
-                />
+                  {/* ui-elements */}
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/ui-element/avatar`}
+                    component={Avatar}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/ui-element/uibreadcrumb`}
+                    component={UIBreadCrumb}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/ui-element/grid`}
+                    component={Grid}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/ui-element/helperclass`}
+                    component={HelperClass}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/ui-element/list`}
+                    component={List}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/ui-element/ribbon`}
+                    component={Ribbon}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/ui-element/shadow`}
+                    component={Shadow}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/ui-element/spinner`}
+                    component={Spinner}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/ui-element/statecolor`}
+                    component={Statecolor}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/ui-element/steps`}
+                    component={Steps}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/ui-element/tagsandpills`}
+                    component={TagsandPills}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/ui-element/typography`}
+                    component={Typography}
+                  />
 
-                {/* base */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/base/accordion`}
-                  component={Accordion}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/base/alert`}
-                  component={AlertComponent}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/base/carouselComponent`}
-                  component={CarouselComponent}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/base/collapseComponent`}
-                  component={CollapseComponent}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/base/datepickerComponent`}
-                  component={DatepickerComponent}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/base/dropdownComponent`}
-                  component={DropdownComponent}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/base/modalComponent`}
-                  component={ModalComponent}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/base/pagination`}
-                  component={Pagination}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/base/popover/popoverComponent`}
-                  component={PopoverComponent}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/base/progressBar`}
-                  component={ProgressBar}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/base/ratingComponent`}
-                  component={RatingComponent}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/base/tabs-set`}
-                  component={TabsSet}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/base/tooltipsComponent`}
-                  component={TooltipsComponent}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/base/timepicker`}
-                  component={TimePickerWrapper}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/base/typeahead`}
-                  component={TypeaheadComp}
-                />
+                  {/* base */}
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/base/accordion`}
+                    component={Accordion}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/base/alert`}
+                    component={AlertComponent}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/base/carouselComponent`}
+                    component={CarouselComponent}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/base/collapseComponent`}
+                    component={CollapseComponent}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/base/datepickerComponent`}
+                    component={DatepickerComponent}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/base/dropdownComponent`}
+                    component={DropdownComponent}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/base/modalComponent`}
+                    component={ModalComponent}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/base/pagination`}
+                    component={Pagination}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/base/popover/popoverComponent`}
+                    component={PopoverComponent}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/base/progressBar`}
+                    component={ProgressBar}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/base/ratingComponent`}
+                    component={RatingComponent}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/base/tabs-set`}
+                    component={TabsSet}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/base/tooltipsComponent`}
+                    component={TooltipsComponent}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/base/timepicker`}
+                    component={TimePickerWrapper}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/base/typeahead`}
+                    component={TypeaheadComp}
+                  />
 
-                {/* Advance */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/advance/dragNDropComp`}
-                  component={DragNDropComp}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/advance/dropzone`}
-                  component={DropzoneComponent}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/advance/imageCropper`}
-                  component={ImageCropper}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/advance/toastr`}
-                  component={Toastr}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/advance/carousel`}
-                  component={Carousel}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/advance/rangeSlider`}
-                  component={RangeSlider}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/advance/scrollable`}
-                  component={Scrollable}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/advance/stickyNotes`}
-                  component={StickyNotes}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/advance/sweetAlert`}
-                  component={SweetAlert}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/advance/tourComponent`}
-                  component={TourComponent}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/advance/uploadImage`}
-                  component={UploadImage}
-                />
+                  {/* Advance */}
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/advance/dragNDropComp`}
+                    component={DragNDropComp}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/advance/dropzone`}
+                    component={DropzoneComponent}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/advance/imageCropper`}
+                    component={ImageCropper}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/advance/toastr`}
+                    component={Toastr}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/advance/carousel`}
+                    component={Carousel}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/advance/rangeSlider`}
+                    component={RangeSlider}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/advance/scrollable`}
+                    component={Scrollable}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/advance/stickyNotes`}
+                    component={StickyNotes}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/advance/sweetAlert`}
+                    component={SweetAlert}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/advance/tourComponent`}
+                    component={TourComponent}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/advance/uploadImage`}
+                    component={UploadImage}
+                  />
 
-                {/* icons */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/icons/flagIcons`}
-                  component={FlagIcons}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/icons/fontAwsomeIcon`}
-                  component={FontAwsomeIcon}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/icons/icoIcons`}
-                  component={IcoIcons}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/icons/themifyIcons`}
-                  component={ThemifyIcons}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/icons/featherIcons`}
-                  component={FeatherIcons}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/icons/weatherIcons`}
-                  component={WeatherIcons}
-                />
+                  {/* icons */}
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/icons/flagIcons`}
+                    component={FlagIcons}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/icons/fontAwsomeIcon`}
+                    component={FontAwsomeIcon}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/icons/icoIcons`}
+                    component={IcoIcons}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/icons/themifyIcons`}
+                    component={ThemifyIcons}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/icons/featherIcons`}
+                    component={FeatherIcons}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/icons/weatherIcons`}
+                    component={WeatherIcons}
+                  />
 
-                {/* buttons */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/buttons/default-btn`}
-                  component={DefaultBtn}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/buttons/flatBtn`}
-                  component={FlatBtn}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/buttons/edgeBtn`}
-                  component={EdgeBtn}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/buttons/raisedBtn`}
-                  component={RaisedBtn}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/buttons/groupBtn`}
-                  component={GroupBtn}
-                />
+                  {/* buttons */}
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/buttons/default-btn`}
+                    component={DefaultBtn}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/buttons/flatBtn`}
+                    component={FlatBtn}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/buttons/edgeBtn`}
+                    component={EdgeBtn}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/buttons/raisedBtn`}
+                    component={RaisedBtn}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/buttons/groupBtn`}
+                    component={GroupBtn}
+                  />
 
-                {/* gallery */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/gallery/imageGallery`}
-                  component={ImageGallery}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/gallery/imageWithDesc`}
-                  component={ImageWithDesc}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/gallery/imageHover`}
-                  component={ImageHover}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/gallery/mesonryGallery`}
-                  component={MesonryGallery}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/gallery/mesonryDesc`}
-                  component={MesonryDesc}
-                />
+                  {/* gallery */}
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/gallery/imageGallery`}
+                    component={ImageGallery}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/gallery/imageWithDesc`}
+                    component={ImageWithDesc}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/gallery/imageHover`}
+                    component={ImageHover}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/gallery/mesonryGallery`}
+                    component={MesonryGallery}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/gallery/mesonryDesc`}
+                    component={MesonryDesc}
+                  />
 
-                {/* Forms */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/forms/form-validation`}
-                  component={FormValidation}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/forms/baseInput`}
-                  component={BaseInput}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/forms/radio-checkbox`}
-                  component={RadioCheckbox}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/forms/inputGroup`}
-                  component={InputGroupComp}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/forms/megaOptions`}
-                  component={MegaOptions}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/forms/formDefault`}
-                  component={FormDefault}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/forms/FormWizard`}
-                  component={FormWizard}
-                />
+                  {/* Forms */}
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/forms/form-validation`}
+                    component={FormValidation}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/forms/baseInput`}
+                    component={BaseInput}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/forms/radio-checkbox`}
+                    component={RadioCheckbox}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/forms/inputGroup`}
+                    component={InputGroupComp}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/forms/megaOptions`}
+                    component={MegaOptions}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/forms/formDefault`}
+                    component={FormDefault}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/forms/FormWizard`}
+                    component={FormWizard}
+                  />
 
-                {/* Tables */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/table/datatable`}
-                  component={DataTableComponent}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/table/basic`}
-                  component={BasicTable}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/table/sizing`}
-                  component={SizingTable}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/table/border`}
-                  component={BorderTable}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/table/styling`}
-                  component={StylingTable}
-                />
+                  {/* Tables */}
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/table/datatable`}
+                    component={DataTableComponent}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/table/basic`}
+                    component={BasicTable}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/table/sizing`}
+                    component={SizingTable}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/table/border`}
+                    component={BorderTable}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/table/styling`}
+                    component={StylingTable}
+                  />
 
-                {/* cards */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/cards/basicCards`}
-                  component={BasicCards}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/cards/creativeCards`}
-                  component={CreativeCards}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/cards/tabCard`}
-                  component={TabCard}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/cards/draggingCards`}
-                  component={DraggingCards}
-                />
+                  {/* cards */}
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/cards/basicCards`}
+                    component={BasicCards}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/cards/creativeCards`}
+                    component={CreativeCards}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/cards/tabCard`}
+                    component={TabCard}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/cards/draggingCards`}
+                    component={DraggingCards}
+                  />
 
-                {/* Timeline */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/timelines/timeline`}
-                  component={Timeline}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/timelines/timeline2`}
-                  component={Timeline2}
-                />
+                  {/* Timeline */}
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/timelines/timeline`}
+                    component={Timeline}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/timelines/timeline2`}
+                    component={Timeline2}
+                  />
 
-                {/* Charts */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/charts/googleChart`}
-                  component={GoogleChart}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/charts/chartJs`}
-                  component={ChartJs}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/charts/chartistComponent`}
-                  component={ChartistComponent}
-                />
+                  {/* Charts */}
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/charts/googleChart`}
+                    component={GoogleChart}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/charts/chartJs`}
+                    component={ChartJs}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/charts/chartistComponent`}
+                    component={ChartistComponent}
+                  />
 
-                {/* Map */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/map/googleMap`}
-                  component={GoogleMap}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/map/leafletMap`}
-                  component={LeafletMapComp}
-                />
+                  {/* Map */}
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/map/googleMap`}
+                    component={GoogleMap}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/map/leafletMap`}
+                    component={LeafletMapComp}
+                  />
 
-                {/* Editor */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/editor/editor1`}
-                  component={Editor1}
-                />
+                  {/* Editor */}
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/editor/editor1`}
+                    component={Editor1}
+                  />
 
-                {/* Users */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/users/userProfile`}
-                  component={UserProfile}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/users/userEdit`}
-                  component={UserEdit}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/users/userCards`}
-                  component={UserCards}
-                />
+                  {/* Users */}
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/users/userProfile`}
+                    component={UserProfile}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/users/userEdit`}
+                    component={UserEdit}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/users/userCards`}
+                    component={UserCards}
+                  />
 
-                {/* Calender */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/calender/calender1`}
-                  component={Calender1}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/calender/calender2`}
-                  component={Calender2}
-                />
+                  {/* Calender */}
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/calender/calender1`}
+                    component={Calender1}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/calender/calender2`}
+                    component={Calender2}
+                  />
 
-                {/* Reporting */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/dashboard/reporting`}
-                  component={Reporting}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/dashboard/reporting2`}
-                  component={Reporting2}
-                />
+                  {/* Reporting */}
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/dashboard/reporting`}
+                    component={Reporting}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/dashboard/reporting2`}
+                    component={Reporting2}
+                  />
 
-                {/* Blog */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/blog/blogDetail`}
-                  component={BlogDetail}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/blog/blogSingle`}
-                  component={BlogSingle}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/blog/blogPost`}
-                  component={BlogPost}
-                />
+                  {/* Blog */}
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/blog/blogDetail`}
+                    component={BlogDetail}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/blog/blogSingle`}
+                    component={BlogSingle}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/blog/blogPost`}
+                    component={BlogPost}
+                  />
 
-                {/* Social App */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/social/socialApp`}
-                  component={SocialApp}
-                />
+                  {/* Social App */}
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/social/socialApp`}
+                    component={SocialApp}
+                  />
 
-                {/* Job Search App */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/jobSearch/cardView`}
-                  component={CardView}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/jobSearch/job-list`}
-                  component={JobList}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/jobSearch/job-detail`}
-                  component={JobDetail}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/jobSearch/job-apply`}
-                  component={JobApply}
-                />
+                  {/* Job Search App */}
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/jobSearch/cardView`}
+                    component={CardView}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/jobSearch/job-list`}
+                    component={JobList}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/jobSearch/job-detail`}
+                    component={JobDetail}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/jobSearch/job-apply`}
+                    component={JobApply}
+                  />
 
-                {/* Learning App */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/learning/learning-list`}
-                  component={LearningList}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/learning/learning-detail`}
-                  component={LearningDeatil}
-                />
+                  {/* Learning App */}
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/learning/learning-list`}
+                    component={LearningList}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/learning/learning-detail`}
+                    component={LearningDeatil}
+                  />
 
-                {/* FAQ */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/faq/faqComponent`}
-                  component={FaqComponent}
-                />
+                  {/* FAQ */}
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/faq/faqComponent`}
+                    component={FaqComponent}
+                  />
 
-                {/* Knowledgebase */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/knowledgebase/knowledgebaseComponent`}
-                  component={KnowledgebaseComponent}
-                />
+                  {/* Knowledgebase */}
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/knowledgebase/knowledgebaseComponent`}
+                    component={KnowledgebaseComponent}
+                  />
 
-                {/* Support Ticket */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/support-ticket/supportTicket`}
-                  component={SupportTicket}
-                />
+                  {/* Support Ticket */}
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/support-ticket/supportTicket`}
+                    component={SupportTicket}
+                  />
 
-                {/* Applications */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/todo-app/todo`}
-                  component={Todo}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/email-app/emailDefault`}
-                  component={EmailDefault}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/chat-app/chat`}
-                  component={Chat}
-                />
+                  {/* Applications */}
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/todo-app/todo`}
+                    component={Todo}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/email-app/emailDefault`}
+                    component={EmailDefault}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/chat-app/chat`}
+                    component={Chat}
+                  />
 
-                {/* Ecommerce App */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/ecommerce/product`}
-                  component={EcommerceApp}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/ecommerce/cart/:id`}
-                  component={AddToCart}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/ecommerce/wishlist/:id`}
-                  component={WishlistComponent}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/ecommerce/product-detail/:id`}
-                  component={ProductDetail}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/ecommerce/checkout`}
-                  component={Checkout}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/ecommerce/invoice`}
-                  component={Invoice}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/ecommerce/product-list`}
-                  component={ProductList}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/ecommerce/payment`}
-                  component={Payment}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/ecommerce/history`}
-                  component={History}
-                />
+                  {/* Ecommerce App */}
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/ecommerce/product`}
+                    component={EcommerceApp}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/ecommerce/cart/:id`}
+                    component={AddToCart}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/ecommerce/wishlist/:id`}
+                    component={WishlistComponent}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/ecommerce/product-detail/:id`}
+                    component={ProductDetail}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/ecommerce/checkout`}
+                    component={Checkout}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/ecommerce/invoice`}
+                    component={Invoice}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/ecommerce/product-list`}
+                    component={ProductList}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/ecommerce/payment`}
+                    component={Payment}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/ecommerce/history`}
+                    component={History}
+                  />
 
-                {/* To-Do-Firebase */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/todo-app/todo-firebase`}
-                  component={todoFirebase}
-                />
+                  {/* To-Do-Firebase */}
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/todo-app/todo-firebase`}
+                    component={todoFirebase}
+                  />
 
-                {/* CONTACT APP */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/contact-app/contact`}
-                  component={ContactApp}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/contact-app/new-user`}
-                  component={NewUser}
-                />
-                <Route
-                  path={`${process.env.PUBLIC_URL}/contact-app/edit-user/:id`}
-                  component={EditUser}
-                />
+                  {/* CONTACT APP */}
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/contact-app/contact`}
+                    component={ContactApp}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/contact-app/new-user`}
+                    component={NewUser}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/contact-app/edit-user/:id`}
+                    component={EditUser}
+                  />
 
-                {/* Search page */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/search/searchpage`}
-                  component={Searchpage}
-                />
+                  {/* Search page */}
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/search/searchpage`}
+                    component={Searchpage}
+                  />
 
-                {/* Sample page */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/sample/samplepage`}
-                  component={Samplepage}
-                />
+                  {/* Sample page */}
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/sample/samplepage`}
+                    component={Samplepage}
+                  />
 
-                {/* Pricing */}
-                <Route
-                  path={`${process.env.PUBLIC_URL}/price/pricing`}
-                  component={Pricing}
-                />
-              </App>
+                  {/* Pricing */}
+                  <Route
+                    path={`${process.env.PUBLIC_URL}/price/pricing`}
+                    component={Pricing}
+                  />
+                </App>
+              ) : (
+                <Redirect to={`${process.env.PUBLIC_URL}/login`} />
+              )}
             </Fragment>
             {/* :
                                 <Redirect to={`${process.env.PUBLIC_URL}/login`} />

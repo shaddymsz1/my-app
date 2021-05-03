@@ -45,21 +45,18 @@ const Leads = () => {
         style={{ display: "flex", paddingBottom: "40px", alignItems: "center" }}
       >
         <Breadcrumb parent="Dashboard" title="Leads" />
-        {permission.create_lead == true ? (
-          <div>
-            <button
-              style={{ width: "181px", marginRight: "16px" }}
-              className="btn btn-block btn-secondary btn-outline-secondary  "
-              class="btn pull-right btn-block btn-primary text-center"
-              type="button"
-              onClick={handleOnClick}
-            >
-              Create Lead
-            </button>
-          </div>
-        ) : (
-          <p></p>
-        )}
+
+        <div>
+          <button
+            style={{ width: "181px", marginRight: "16px" }}
+            className="btn btn-block btn-secondary btn-outline-secondary  "
+            class="btn pull-right btn-block btn-primary text-center"
+            type="button"
+            onClick={handleOnClick}
+          >
+            Create Lead
+          </button>
+        </div>
       </div>
 
       <div className="container-fluid  ">
